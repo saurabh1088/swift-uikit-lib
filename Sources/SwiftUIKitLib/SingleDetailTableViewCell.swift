@@ -15,19 +15,27 @@
 
 import UIKit
 
-class SingleDetailTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
+public class SingleDetailTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var detailLabel: UILabel!
+    
+    public override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    public func setDetailText(_ text: String) {
+        detailLabel.text = text
+    }
+    
+    public func configureDetailLabel(text: String, font: UIFont, textColor: UIColor) {
+        detailLabel.text = text
+        detailLabel.font = font
+        detailLabel.textColor = textColor
+    }
 }
 
 #endif
