@@ -31,10 +31,14 @@ public class SingleDetailTableViewCell: UITableViewCell {
         detailLabel.text = text
     }
     
-    public func configureDetailLabel(text: String, font: UIFont, textColor: UIColor) {
+    public func configureDetailLabel(text: String,
+                                     font: UIFont = .systemFont(ofSize: 17.0),
+                                     textColor: UIColor = .black,
+                                     backgroundColor: UIColor = .white) {
         detailLabel.text = text
         detailLabel.font = font
         detailLabel.textColor = textColor
+        detailLabel.backgroundColor = backgroundColor
     }
 }
 
