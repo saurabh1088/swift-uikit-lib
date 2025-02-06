@@ -10,6 +10,7 @@ class SingleDetailTableViewCellTests {
     
     func setup() async throws {
         tableView = await UITableView()
+        // TODO: Fix issue Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'Could not load NIB in bundle: 'NSBundle
         await tableView.register(UINib(nibName: "SingleDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleDetailTableViewCell")
         cell = await tableView.dequeueReusableCell(withIdentifier: "SingleDetailTableViewCell") as? SingleDetailTableViewCell
     }

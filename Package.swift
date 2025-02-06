@@ -18,7 +18,11 @@ let package = Package(
             name: "SwiftUIKitLib"),
         .testTarget(
             name: "SwiftUIKitLibTests",
-            dependencies: ["SwiftUIKitLib"]
+            dependencies: ["SwiftUIKitLib"],
+            // Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'Could not load NIB in bundle: 'NSBundle. Still not working
+            resources: [
+                .process("../../Sources/SwiftUIKitLib/SingleDetailTableViewCell.xib")
+            ]
         ),
     ]
 )
