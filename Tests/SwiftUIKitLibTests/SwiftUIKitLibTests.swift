@@ -26,4 +26,33 @@ class SingleDetailTableViewCellTests {
         // Then
         #expect(sut.detailLabel.text == testText, "The text set should match the test text")
     }
+    
+    @MainActor @Test func testDetailLabelSetTextNil() throws {
+        // Given
+        try setup()
+        
+        // Then
+        #expect(sut.detailTextLabel?.text == nil, "The text set should match the test text")
+    }
+    
+    @MainActor @Test func testConfigureTableViewCell() throws {
+        // Given
+        try setup()
+        let testText = "Test Text"
+        let testFont = UIFont.systemFont(ofSize: 15)
+        let testTextColor = UIColor.red
+        let testBackgroundColor = UIColor.blue
+
+        // When
+        sut.configureDetailLabel(text: testText,
+                                 font: testFont,
+                                 textColor: testTextColor,
+                                 backgroundColor: testBackgroundColor)
+
+        // Then
+        #expect(sut.detailLabel.text == testText, "The text set should match the test text.")
+        #expect(sut.detailLabel.font == testFont, "The font set should match the test font.")
+        #expect(sut.detailLabel.textColor == testTextColor, "The text color set should match the test color.")
+        #expect(sut.detailLabel.backgroundColor == testBackgroundColor, "The background color set should match the test background color.")
+    }
 }
