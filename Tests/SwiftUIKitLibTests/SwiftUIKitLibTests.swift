@@ -8,18 +8,12 @@ class SingleDetailTableViewCellTests {
     var sut: SingleDetailTableViewCell!
     
     @MainActor func setup() throws {
-        let bundle = Bundle(for:SingleDetailTableViewCell.self)
-        let nib = UINib(nibName: "SingleDetailTableViewCell", bundle: bundle)
-        //nibName should be the same as your file name
-        sut = nib.instantiate(withOwner: nil, options: nil).first as? SingleDetailTableViewCell
-        
-        
-        
-//        let bundle = Bundle.module
-//        let nib = UINib(nibName: "SingleDetailTableViewCell", bundle: bundle)
-//        sut = nib.instantiate(withOwner: nil, options: nil)[0] as? SingleDetailTableViewCell
+        let nib = UINib(nibName: "SingleDetailTableViewCell", bundle: Bundle.module)
+        sut = nib.instantiate(withOwner: nil, options: nil)[0] as? SingleDetailTableViewCell
+        if sut == nil {
+            throw NSError(domain: "TestSetup", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to instantiate SingleDetailTableViewCell"])
+        }
     }
-    
     
     @MainActor @Test func testDetailLabelSetText() throws {
         // Given
