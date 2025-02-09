@@ -5,26 +5,31 @@ import UIKit
 @Suite("Single Detail Table View Cell Tests")
 class SingleDetailTableViewCellTests {
     
-    var tableView: UITableView!
-    var cell: SingleDetailTableViewCell!
+    var sut: SingleDetailTableViewCell!
     
-    func setup() async throws {
-        tableView = await UITableView()
-        // TODO: Fix issue Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'Could not load NIB in bundle: 'NSBundle
-        await tableView.register(UINib(nibName: "SingleDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "SingleDetailTableViewCell")
-        cell = await tableView.dequeueReusableCell(withIdentifier: "SingleDetailTableViewCell") as? SingleDetailTableViewCell
+    @MainActor func setup() throws {
+        let bundle = Bundle(for:SingleDetailTableViewCell.self)
+        let nib = UINib(nibName: "SingleDetailTableViewCell", bundle: bundle)
+        //nibName should be the same as your file name
+        sut = nib.instantiate(withOwner: nil, options: nil).first as? SingleDetailTableViewCell
+        
+        
+        
+//        let bundle = Bundle.module
+//        let nib = UINib(nibName: "SingleDetailTableViewCell", bundle: bundle)
+//        sut = nib.instantiate(withOwner: nil, options: nil)[0] as? SingleDetailTableViewCell
     }
     
     
-    @Test func testDetailLabelSetText() async throws {
+    @MainActor @Test func testDetailLabelSetText() throws {
         // Given
         let testText = "Test Text"
-        try await setup()
+        try setup()
                 
         // When
-        await cell.setDetailText(testText)
+        sut.setDetailText(testText)
         
         // Then
-        await #expect(cell.detailLabel.text == testText, "The text set should match the test text")
+        #expect(sut.detailLabel.text == testText, "The text set should match the test text")
     }
 }
