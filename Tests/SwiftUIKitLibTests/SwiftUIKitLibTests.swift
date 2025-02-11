@@ -24,7 +24,6 @@ class SingleDetailTableViewCellTests {
         sut.setDetailText(testText)
         
         // Then
-        
         #expect(sut.detailLabel.text == testText, "Expected detailLabel.text to be '\(testText)', but got '\(String(describing: sut.detailLabel.text))'")
     }
     
@@ -34,7 +33,6 @@ class SingleDetailTableViewCellTests {
         
         // Then
         #expect(sut.detailTextLabel?.text == nil, "Expected detailTextLabel?.text to be nil, but got '\(String(describing: sut.detailTextLabel?.text))'")
-        
     }
     
     @MainActor @Test func testConfigureTableViewCell() throws {
