@@ -15,6 +15,26 @@ class SingleDetailTableViewCellTests {
         }
     }
     
+    @MainActor @Test func testAwakeFromNib() throws {
+        // Given
+        try setup()
+        
+        // Then
+        #expect(sut.detailTextLabel == nil, "detailTextLabel should not be instantiated in awakeFromNib")
+    }
+
+    @MainActor @Test func testSetSelected() throws {
+        // Given
+        try setup()
+        
+        // When
+        // We can't directly test the visual changes here, but we can test if the method is called without crashing.
+        sut.setSelected(true, animated: true)
+        
+        // Then
+        #expect(sut.isSelected == true, "Cell should be selected after setSelected(true)")
+    }
+    
     @MainActor @Test func testDetailLabelSetText() throws {
         // Given
         let testText = "Test Text"
