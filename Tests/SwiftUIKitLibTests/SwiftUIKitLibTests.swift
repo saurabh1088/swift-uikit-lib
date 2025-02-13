@@ -76,7 +76,7 @@ class SingleDetailTableViewCellTests {
             "Expected detailLabel.font to be '\(testFont)', but got '\(String(describing: sut.detailLabel.font))'")
         #expect(sut.detailLabel.textColor == testTextColor,
             "Expected detailLabel.textColor to be \(testTextColor), but got \(String(describing: sut.detailLabel.textColor))")
-        #expect(sut.detailLabel.backgroundColor == testBackgroundColor,
-            "Expected detailLabel.backgroundColor to be \(testBackgroundColor), but got \(String(describing: sut.detailLabel.backgroundColor))")
+        #expect(sut.backgroundColor == testBackgroundColor,
+            "Expected detailLabel.backgroundColor to be \(testBackgroundColor), but got \(String(describing: sut.backgroundColor))")
     }
 }

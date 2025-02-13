@@ -38,7 +38,7 @@ public class SingleDetailTableViewCell: UITableViewCell {
         detailLabel.text = text
         detailLabel.font = font
         detailLabel.textColor = textColor
-        detailLabel.backgroundColor = backgroundColor
+        self.backgroundColor = backgroundColor
     }
 }
 
