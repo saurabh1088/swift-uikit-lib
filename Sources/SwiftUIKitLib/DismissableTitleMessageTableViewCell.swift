@@ -9,7 +9,7 @@
 
 import UIKit
 
-class DismissableTitleMessageTableViewCell: UITableViewCell {
+public class DismissableTitleMessageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var leadingIconImageView: UIImageView!
     
@@ -24,17 +24,17 @@ class DismissableTitleMessageTableViewCell: UITableViewCell {
     var dismissAction: (() -> Void)?
     var actionButtonAction: (() -> Void)?
     
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
 }
 
-extension DismissableTitleMessageTableViewCell {
+public extension DismissableTitleMessageTableViewCell {
     func configure(with title: String,
                    message: String,
                    icon: UIImage?,
