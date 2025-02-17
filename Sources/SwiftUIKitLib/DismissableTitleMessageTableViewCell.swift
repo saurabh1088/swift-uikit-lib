@@ -21,6 +21,8 @@ class DismissableTitleMessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var actionButton: UIButton!
     
+    var dismissAction: (() -> Void)?
+    var actionButtonAction: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +32,20 @@ class DismissableTitleMessageTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+}
+
+extension DismissableTitleMessageTableViewCell {
+    func configure(with title: String,
+                   message: String,
+                   icon: UIImage?,
+                   dismissAction: (() -> Void)? = nil,
+                   actionButtonAction: (() -> Void)? = nil) {
+        titleLabel.text = title
+        messageLabel.text = message
+        leadingIconImageView.image = icon
+        self.dismissAction = dismissAction
+        self.actionButtonAction = actionButtonAction
+    }
 }
 
 #endif
