@@ -11,6 +11,17 @@ import UIKit
 
 class DismissableTitleMessageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var leadingIconImageView: UIImageView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    @IBOutlet weak var dismissButton: UIButton!
+    
+    @IBOutlet weak var actionButton: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
