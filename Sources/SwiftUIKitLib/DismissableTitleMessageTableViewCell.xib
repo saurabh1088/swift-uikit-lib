@@ -34,11 +34,17 @@
                         <rect key="frame" x="237" y="8" width="75" height="35"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                        <connections>
+                            <action selector="dismissButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zVI-Fw-PAq"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ect-dj-bVl">
                         <rect key="frame" x="237" y="89" width="75" height="35"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                        <connections>
+                            <action selector="actionButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0er-ee-ejK"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fw-1Z-9vO">
                         <rect key="frame" x="8" y="37" width="42" height="21"/>

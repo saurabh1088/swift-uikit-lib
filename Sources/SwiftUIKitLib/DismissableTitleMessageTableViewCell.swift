@@ -32,6 +32,15 @@ public class DismissableTitleMessageTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    // IBAction for dismiss button
+    @IBAction func dismissButtonTapped(_ sender: UIButton) {
+        dismissAction?()
+    }
+    
+    // IBAction for action button
+    @IBAction func actionButtonTapped(_ sender: UIButton) {
+        actionButtonAction?()
+    }
 }
 
 public extension DismissableTitleMessageTableViewCell {
