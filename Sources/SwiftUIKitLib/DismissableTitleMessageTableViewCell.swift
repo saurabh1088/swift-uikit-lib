@@ -57,4 +57,16 @@ public extension DismissableTitleMessageTableViewCell {
     }
 }
 
+public extension DismissableTitleMessageTableViewCell {
+    // Computed property for dismissButton
+    var dismissButtonControl: UIButton {
+        return dismissButton
+    }
+    
+    // Computed property for actionButton
+    var actionButtonControl: UIButton {
+        return actionButton
+    }
+}
+
 #endif
