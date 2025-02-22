@@ -9,13 +9,17 @@ import UIKit
 
 public extension UITableView {
     func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
-        guard let cell = dequeueReusableCell(withIdentifier: T.identifier, for: indexPath) as? T else {
+        guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("The dequeued cell is not an instance of \(T.self).")
         }
         return cell
     }
     
     func register<T: UITableViewCell>(_: T.Type) where T: ReusableView {
-        register(T.self, forCellReuseIdentifier: T.defaultReuseIdentifier)
+        if let nib = T.nib {
+            register(nib, forCellReuseIdentifier: T.reuseIdentifier)
+        } else {
+            register(T.self, forCellReuseIdentifier: T.reuseIdentifier)
+        }
     }
 }
