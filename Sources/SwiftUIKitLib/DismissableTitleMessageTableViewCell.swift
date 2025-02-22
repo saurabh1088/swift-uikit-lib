@@ -9,7 +9,7 @@
 
 import UIKit
 
-public class DismissableTitleMessageTableViewCell: UITableViewCell {
+public class DismissableTitleMessageTableViewCell: UITableViewCell, ReusableView {
 
     @IBOutlet weak var leadingIconImageView: UIImageView!
     

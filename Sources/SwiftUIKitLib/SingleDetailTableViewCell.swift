@@ -15,7 +15,7 @@
 
 import UIKit
 
-public class SingleDetailTableViewCell: UITableViewCell {
+public class SingleDetailTableViewCell: UITableViewCell, ReusableView {
     
     @IBOutlet weak var detailLabel: UILabel!
     
