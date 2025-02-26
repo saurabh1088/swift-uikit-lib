@@ -16,13 +16,18 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "SwiftUIKitLib",
-            resources: [.process("SingleDetailTableViewCell.xib")]),
+            resources: [
+                .process("SingleDetailTableViewCell.xib"),
+                .process("DismissableTitleMessageTableViewCell.xib")
+            ]
+        ),
         .testTarget(
             name: "SwiftUIKitLibTests",
             dependencies: ["SwiftUIKitLib"],
             // Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'Could not load NIB in bundle: 'NSBundle. Still not working
             resources: [
-                .process("../../Sources/SwiftUIKitLib/SingleDetailTableViewCell.xib")
+                .process("../../Sources/SwiftUIKitLib/SingleDetailTableViewCell.xib"),
+                .process("../../Sources/SwiftUIKitLib/DismissableTitleMessageTableViewCell.xib")
             ]
         ),
     ]
