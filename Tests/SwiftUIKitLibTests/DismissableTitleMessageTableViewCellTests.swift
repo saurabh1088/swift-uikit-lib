@@ -29,5 +29,30 @@ class DismissableTitleMessageTableViewCellTests {
         // Then
         #expect(sut.detailTextLabel == nil, "detailTextLabel should not be instantiated in awakeFromNib")
     }
+    
+    @MainActor @Test func testSetSelected() throws {
+        // Given
+        try setup()
+        
+        // When
+        // We can't directly test the visual changes here, but we can test if the method is called without crashing.
+        sut.setSelected(true, animated: true)
+        
+        // Then
+        #expect(sut.isSelected == true, "Cell should be selected after setSelected(true)")
+    }
+    
+    @MainActor @Test func testDefaultReuseIdentifier() throws {
+        // Given
+        try setup()
+        var expectedIdentifier = String(describing: DismissableTitleMessageTableViewCell.self)
+        expectedIdentifier = "SwiftUIKitLib.\(expectedIdentifier)"
+        
+        // When
+        let identifier = DismissableTitleMessageTableViewCell.defaultReuseIdentifier
+        
+        // Then
+        #expect(identifier == expectedIdentifier, "Reuse identifier should match the class name")
+    }
 }
 
