@@ -79,6 +79,14 @@ If module name is missing then IBOutlets are not properly realised.
     - Animated selection indicator (underline or background).
     - Configurable tint colors for selected/unselected states.
     - Delegate callback for segment changes.
+    
+- [ ] Theme Manager
+    - Define app-wide themes (e.g., light, dark, custom) with colors, fonts, and spacing.
+    - Apply themes to all components globally or individually.
+    - Support for dynamic theme switching (e.g., based on system appearance).
+    - Predefined themes (e.g., iOS default, material design).
+
+
 
 
 
