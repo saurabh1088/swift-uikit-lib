@@ -66,4 +66,12 @@ If module name is missing then IBOutlets are not properly realised.
     - Customizable padding and border styles.
     - Delegate callbacks for validation events.
 
+- [ ] Configurable Card View
+    - A container view with shadow, border, and corner radius options.
+    - Background color or gradient support.
+    - Tap gesture support with delegate callbacks.
+    - Support for embedding subviews (e.g., labels, images).
+    - Adjustable elevation levels (higher elevation = bigger shadow).
+
+
 
