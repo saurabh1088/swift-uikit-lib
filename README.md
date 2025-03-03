@@ -86,6 +86,11 @@ If module name is missing then IBOutlets are not properly realised.
     - Support for dynamic theme switching (e.g., based on system appearance).
     - Predefined themes (e.g., iOS default, material design).
 
+- [ ] StackView Wrapper
+    - A UIStackView subclass with simplified configuration for spacing, alignment, and distribution.
+    - Methods to easily add components like StyledButton or ValidatedTextField.
+    - Support for dynamic insertion/removal of components with animations.
+
 
 
 
