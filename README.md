@@ -91,6 +91,11 @@ If module name is missing then IBOutlets are not properly realised.
     - Methods to easily add components like StyledButton or ValidatedTextField.
     - Support for dynamic insertion/removal of components with animations.
 
+- [ ] Spacing and Padding Utilities
+    - Extension methods on UIView for adding consistent padding or margins.
+    - Predefined spacing constants (e.g., small, medium, large).
+
+
 
 
 
