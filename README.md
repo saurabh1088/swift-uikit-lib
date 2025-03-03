@@ -57,4 +57,13 @@ If module name is missing then IBOutlets are not properly realised.
     - Haptic feedback on tap (optional).
     - Support for different states (normal, highlighted, disabled) with distinct styles.
 
+- [ ] Text Field with Validation
+    - Placeholder text with customizable style.
+    - Built-in validation rules (e.g., email, password length, required field).
+    - Real-time validation feedback (e.g., border color changes to green/red).
+    - Support for secure text entry (e.g., for passwords).
+    - Left/right accessory views (e.g., icons for email, password visibility toggle).
+    - Customizable padding and border styles.
+    - Delegate callbacks for validation events.
+
 
