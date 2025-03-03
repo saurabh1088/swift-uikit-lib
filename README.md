@@ -95,6 +95,14 @@ If module name is missing then IBOutlets are not properly realised.
     - Extension methods on UIView for adding consistent padding or margins.
     - Predefined spacing constants (e.g., small, medium, large).
 
+- [ ] Animated Transitions
+    - Prebuilt animations for showing/hiding components (e.g., fade, slide).
+    - Configurable animation duration and easing curves.
+
+- [ ] Interactive Effects
+    - Scale or highlight effects on tap for buttons and cards.
+    - Haptic feedback for interactions.
+
 
 
 
