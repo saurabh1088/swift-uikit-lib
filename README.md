@@ -48,7 +48,7 @@ Detailed error :
 If module name is missing then IBOutlets are not properly realised.
 
 ## Future Enhancements
-- [] Customizable Button
+- [ ] Customizable Button
     - Configurable title, font, and text color.
     - Support for background colors, gradients, and images.
     - Border customization (width, color, corner radius).
