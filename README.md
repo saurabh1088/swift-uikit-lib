@@ -46,3 +46,15 @@ Detailed error :
 
 1. Make sure the xib's Custom Class section has both class and module name set.
 If module name is missing then IBOutlets are not properly realised.
+
+## Future Enhancements
+- [] Customizable Button
+    - Configurable title, font, and text color.
+    - Support for background colors, gradients, and images.
+    - Border customization (width, color, corner radius).
+    - Shadow effects (offset, radius, opacity).
+    - Loading state with a built-in activity indicator.
+    - Haptic feedback on tap (optional).
+    - Support for different states (normal, highlighted, disabled) with distinct styles.
+
+
