@@ -73,5 +73,12 @@ If module name is missing then IBOutlets are not properly realised.
     - Support for embedding subviews (e.g., labels, images).
     - Adjustable elevation levels (higher elevation = bigger shadow).
 
+- [ ] Segmented Control
+    - Customizable segment titles, colors, and fonts.
+    - Support for icons in segments.
+    - Animated selection indicator (underline or background).
+    - Configurable tint colors for selected/unselected states.
+    - Delegate callback for segment changes.
+
 
 
