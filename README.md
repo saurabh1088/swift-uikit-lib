@@ -56,6 +56,7 @@ If module name is missing then IBOutlets are not properly realised.
     - Loading state with a built-in activity indicator.
     - Haptic feedback on tap (optional).
     - Support for different states (normal, highlighted, disabled) with distinct styles.
+    - Configurable action on tap
 
 - [ ] Text Field with Validation
     - Placeholder text with customizable style.
