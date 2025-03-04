@@ -10,11 +10,19 @@ import UIKit
 /**
  A highly customizable button built on top of UIButton, supporting various styles, states, and interactions.
  */
-class CustomizableButton: UIButton {
+public class CustomizableButton: UIButton {
     
     // MARK: - Properties
     
     // MARK: - Initialization
+    
+    // MARK: - Customization Methods
+    
+    public func setupWith(title: String, font: UIFont, textColor: UIColor) {
+        setTitle(title, for: .normal)
+        titleLabel?.font = font
+        setTitleColor(textColor, for: .normal)
+    }
 
     /*
     // Only override draw() if you perform custom drawing.
