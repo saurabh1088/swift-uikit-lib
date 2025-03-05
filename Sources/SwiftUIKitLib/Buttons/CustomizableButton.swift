@@ -23,6 +23,10 @@ public class CustomizableButton: UIButton {
         titleLabel?.font = font
         setTitleColor(textColor, for: .normal)
     }
+    
+    public func applyBackgroundColor(_ color: UIColor) {
+        backgroundColor = color
+    }
 
     /*
     // Only override draw() if you perform custom drawing.
