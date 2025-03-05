@@ -7,6 +7,14 @@
 
 import UIKit
 
+/// Defines the type of background to apply to the button.
+public enum ButtonBackgroundType {
+    /// A solid background color.
+    case color(UIColor)
+    /// A background image.
+    case image(UIImage)
+}
+
 /**
  A highly customizable button built on top of UIButton, supporting various styles, states, and interactions.
  */
@@ -24,8 +32,13 @@ public class CustomizableButton: UIButton {
         setTitleColor(textColor, for: .normal)
     }
     
-    public func applyBackgroundColor(_ color: UIColor) {
-        backgroundColor = color
+    public func applyBackgroundColor(_ background: ButtonBackgroundType) {
+        switch background {
+            case .color(let color):
+            backgroundColor = color
+        case .image(let image):
+            setBackgroundImage(image, for: .normal)
+        }
     }
 
     /*
