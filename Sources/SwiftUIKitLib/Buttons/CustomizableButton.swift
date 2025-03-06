@@ -32,7 +32,7 @@ public class CustomizableButton: UIButton {
         setTitleColor(textColor, for: .normal)
     }
     
-    public func applyBackgroundColor(_ background: ButtonBackgroundType) {
+    public func applyBackground(_ background: ButtonBackgroundType) {
         switch background {
             case .color(let color):
             backgroundColor = color
