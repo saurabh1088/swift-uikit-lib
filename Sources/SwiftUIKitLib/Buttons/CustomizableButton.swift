@@ -23,6 +23,13 @@ public class CustomizableButton: UIButton {
     // MARK: - Properties
     
     // MARK: - Initialization
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     // MARK: - Customization Methods
     
