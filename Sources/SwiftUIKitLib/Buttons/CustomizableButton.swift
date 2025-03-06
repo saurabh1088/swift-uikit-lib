@@ -36,8 +36,10 @@ public class CustomizableButton: UIButton {
         switch background {
             case .color(let color):
             backgroundColor = color
+            setBackgroundImage(nil, for: .normal) // Clear any existing background image
         case .image(let image):
             setBackgroundImage(image, for: .normal)
+            backgroundColor = nil // Clear any existing background color
         }
     }
 
