@@ -7,6 +7,14 @@
 
 import UIKit
 
+/// Defines the type of background to apply to the button.
+public enum ButtonBackgroundType {
+    /// A solid background color.
+    case color(UIColor)
+    /// A background image.
+    case image(UIImage)
+}
+
 /**
  A highly customizable button built on top of UIButton, supporting various styles, states, and interactions.
  */
@@ -15,6 +23,13 @@ public class CustomizableButton: UIButton {
     // MARK: - Properties
     
     // MARK: - Initialization
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     // MARK: - Customization Methods
     
@@ -22,6 +37,24 @@ public class CustomizableButton: UIButton {
         setTitle(title, for: .normal)
         titleLabel?.font = font
         setTitleColor(textColor, for: .normal)
+    }
+    
+    public func applyBackground(_ background: ButtonBackgroundType) {
+        switch background {
+            case .color(let color):
+            backgroundColor = color
+            setBackgroundImage(nil, for: .normal) // Clear any existing background image
+        case .image(let image):
+            if #available(iOS 15.0, *) {
+                var buttonConfig = configuration ?? UIButton.Configuration.plain()
+                buttonConfig.background.image = image
+                configuration = buttonConfig
+            } else {
+                // Fallback on earlier versions
+                setBackgroundImage(image, for: .normal)
+                backgroundColor = nil // Clear any existing background color
+            }
+        }
     }
 
     /*
