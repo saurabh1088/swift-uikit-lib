@@ -38,8 +38,15 @@ public class CustomizableButton: UIButton {
             backgroundColor = color
             setBackgroundImage(nil, for: .normal) // Clear any existing background image
         case .image(let image):
-            setBackgroundImage(image, for: .normal)
-            backgroundColor = nil // Clear any existing background color
+            if #available(iOS 15.0, *) {
+                var buttonConfig = configuration ?? UIButton.Configuration.plain()
+                buttonConfig.background.image = image
+                configuration = buttonConfig
+            } else {
+                // Fallback on earlier versions
+                setBackgroundImage(image, for: .normal)
+                backgroundColor = nil // Clear any existing background color
+            }
         }
     }
 
