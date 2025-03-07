@@ -31,8 +31,12 @@ public class CustomizableButton: UIButton {
         super.init(coder: coder)
     }
     
-    // MARK: - Customization Methods
+    public convenience init(frame: CGRect, title: String, font: UIFont, textColor: UIColor) {
+        self.init(frame: frame)
+        setupWith(title: title, font: font, textColor: textColor)
+    }
     
+    // MARK: - Customization Methods
     public func setupWith(title: String, font: UIFont, textColor: UIColor) {
         setTitle(title, for: .normal)
         titleLabel?.font = font
