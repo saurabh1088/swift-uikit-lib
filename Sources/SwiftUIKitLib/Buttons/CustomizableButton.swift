@@ -37,7 +37,6 @@ public class CustomizableButton: UIButton {
     }
     
     // MARK: - Customization Methods
-    
     public func setupWith(title: String, font: UIFont, textColor: UIColor) {
         setTitle(title, for: .normal)
         titleLabel?.font = font
