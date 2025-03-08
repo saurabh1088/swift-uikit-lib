@@ -60,6 +60,14 @@ public class CustomizableButton: UIButton {
             }
         }
     }
+    
+    public func applyGradient(colors: [UIColor]) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors.map { $0.cgColor }
+        gradientLayer.frame = bounds
+        gradientLayer.cornerRadius = layer.cornerRadius
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
 
     /*
     // Only override draw() if you perform custom drawing.
