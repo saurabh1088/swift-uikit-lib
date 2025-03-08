@@ -36,6 +36,12 @@ public class CustomizableButton: UIButton {
         setupWith(title: title, font: font, textColor: textColor)
     }
     
+    // TODO: Check if this fixes gradient not visible : Trial 3
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        applyGradient(colors: [UIColor.red, UIColor.blue])
+    }
+    
     // MARK: - Customization Methods
     public func setupWith(title: String, font: UIFont, textColor: UIColor) {
         setTitle(title, for: .normal)
