@@ -66,6 +66,11 @@ public class CustomizableButton: UIButton {
         gradientLayer.colors = colors.map { $0.cgColor }
         gradientLayer.frame = bounds
         gradientLayer.cornerRadius = layer.cornerRadius
+        
+        // TODO: Check if this fixes gradient not visible
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        
         layer.insertSublayer(gradientLayer, at: 0)
     }
 
