@@ -85,10 +85,12 @@ public class CustomizableButton: UIButton {
         gradientLayer.cornerRadius = layer.cornerRadius
         
         // TODO: Check if this fixes gradient not visible : Trial 1
+        // TODO: Issue was fixed, check and remove if not required
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         
         // TODO: Check if this fixes gradient not visible : Trial 2
+        // TODO: Issue was fixed, check and remove if not required
         // Clear background color to ensure gradient is visible
         backgroundColor = nil
         setBackgroundImage(nil, for: .normal)
