@@ -47,6 +47,16 @@ Detailed error :
 1. Make sure the xib's Custom Class section has both class and module name set.
 If module name is missing then IBOutlets are not properly realised.
 
+
+### Issue : Gradient not visible when applied to a view, like UIButton.
+
+1. Bounds Not Set at the Right Time
+2. If gradient is applied in init or before the button’s layout is finalized, bounds might not be set properly.
+
+#### Possible Fix:
+1. Call applyGradient in layoutSubviews() to ensure the correct frame.
+
+
 ## Future Enhancements
 - [ ] Customizable Button
     - Configurable title, font, and text color.

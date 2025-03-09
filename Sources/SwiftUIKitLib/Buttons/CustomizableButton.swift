@@ -13,6 +13,8 @@ public enum ButtonBackgroundType {
     case color(UIColor)
     /// A background image.
     case image(UIImage)
+    /// A color gradient.
+    case gradient([UIColor])
 }
 
 /**
@@ -21,6 +23,7 @@ public enum ButtonBackgroundType {
 public class CustomizableButton: UIButton {
     
     // MARK: - Properties
+    private var backgroundType: ButtonBackgroundType?
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -36,11 +39,23 @@ public class CustomizableButton: UIButton {
         setupWith(title: title, font: font, textColor: textColor)
     }
     
+    // TODO: Check if this fixes gradient not visible : Trial 3
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        if let backgroundType = backgroundType {
+            applyBackground(backgroundType)
+        }
+    }
+    
     // MARK: - Customization Methods
     public func setupWith(title: String, font: UIFont, textColor: UIColor) {
         setTitle(title, for: .normal)
         titleLabel?.font = font
         setTitleColor(textColor, for: .normal)
+    }
+    
+    public func setBackground(to type: ButtonBackgroundType) {
+        backgroundType = type
     }
     
     public func applyBackground(_ background: ButtonBackgroundType) {
@@ -58,7 +73,29 @@ public class CustomizableButton: UIButton {
                 setBackgroundImage(image, for: .normal)
                 backgroundColor = nil // Clear any existing background color
             }
+        case .gradient(let colors):
+            applyGradient(colors: colors)
         }
+    }
+    
+    public func applyGradient(colors: [UIColor]) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors.map { $0.cgColor }
+        gradientLayer.frame = bounds
+        gradientLayer.cornerRadius = layer.cornerRadius
+        
+        // TODO: Check if this fixes gradient not visible : Trial 1
+        // TODO: Issue was fixed, check and remove if not required
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        
+        // TODO: Check if this fixes gradient not visible : Trial 2
+        // TODO: Issue was fixed, check and remove if not required
+        // Clear background color to ensure gradient is visible
+        backgroundColor = nil
+        setBackgroundImage(nil, for: .normal)
+        
+        layer.insertSublayer(gradientLayer, at: 0)
     }
 
     /*
