@@ -13,6 +13,8 @@ public enum ButtonBackgroundType {
     case color(UIColor)
     /// A background image.
     case image(UIImage)
+    /// A color gradient.
+    case gradient([UIColor])
 }
 
 /**
@@ -21,6 +23,7 @@ public enum ButtonBackgroundType {
 public class CustomizableButton: UIButton {
     
     // MARK: - Properties
+    private var backgroundType: ButtonBackgroundType?
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -39,7 +42,9 @@ public class CustomizableButton: UIButton {
     // TODO: Check if this fixes gradient not visible : Trial 3
     public override func layoutSubviews() {
         super.layoutSubviews()
-        applyGradient(colors: [UIColor.red, UIColor.blue])
+        if let backgroundType = backgroundType {
+            applyBackground(backgroundType)
+        }
     }
     
     // MARK: - Customization Methods
@@ -47,6 +52,10 @@ public class CustomizableButton: UIButton {
         setTitle(title, for: .normal)
         titleLabel?.font = font
         setTitleColor(textColor, for: .normal)
+    }
+    
+    public func setBackground(to type: ButtonBackgroundType) {
+        backgroundType = type
     }
     
     public func applyBackground(_ background: ButtonBackgroundType) {
@@ -64,6 +73,8 @@ public class CustomizableButton: UIButton {
                 setBackgroundImage(image, for: .normal)
                 backgroundColor = nil // Clear any existing background color
             }
+        case .gradient(let colors):
+            applyGradient(colors: colors)
         }
     }
     
