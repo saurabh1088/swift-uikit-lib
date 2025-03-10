@@ -24,9 +24,9 @@ public class CustomizableButton: UIButton {
     
     // MARK: - Properties
     private var backgroundType: ButtonBackgroundType?
-    private var borderWidth: CGFloat = 0
-    private var borderColor: UIColor = .clear
-    private var cornerRadius: CGFloat = 0
+    private var borderWidth: CGFloat? = 0
+    private var borderColor: UIColor? = .clear
+    private var cornerRadius: CGFloat? = 0
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -48,7 +48,12 @@ public class CustomizableButton: UIButton {
         if let backgroundType = backgroundType {
             applyBackground(backgroundType)
         }
-        applyBorder(width: borderWidth, color: borderColor, cornerRadius: cornerRadius)
+        if let borderWidth = borderWidth, let borderColor = borderColor {
+            applyBorder(width: borderWidth, color: borderColor)
+        }
+        if let cornerRadius = cornerRadius {
+            applyCornerRadius(cornerRadius)
+        }
     }
     
     // MARK: - Customization Methods
@@ -102,15 +107,19 @@ public class CustomizableButton: UIButton {
         layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    public func applyBorder(width: CGFloat, color: UIColor, cornerRadius: CGFloat) {
+    public func applyBorder(width: CGFloat, color: UIColor) {
         self.borderWidth = width
         self.borderColor = color
-        self.cornerRadius = cornerRadius
         
         layer.borderWidth = width
         layer.borderColor = color.cgColor
-        layer.cornerRadius = cornerRadius
         layer.masksToBounds = true
+    }
+    
+    public func applyCornerRadius(_ radius: CGFloat) {
+        self.cornerRadius = radius
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = true
     }
 
     /*
