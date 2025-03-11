@@ -49,9 +49,7 @@ public class CustomizableButton: UIButton {
             applyBackground(backgroundType)
         }
         applyBorder()
-        if let cornerRadius = cornerRadius {
-            applyCornerRadius(cornerRadius)
-        }
+        applyCornerRadius()
     }
     
     // MARK: - Customization Methods
@@ -68,6 +66,10 @@ public class CustomizableButton: UIButton {
     public func setBorder(with width: CGFloat, color: UIColor) {
         self.borderWidth = width
         self.borderColor = color
+    }
+    
+    public func setCornerRadius(_ radius: CGFloat) {
+        self.cornerRadius = radius
     }
     
     public func applyBackground(_ background: ButtonBackgroundType) {
@@ -118,10 +120,11 @@ public class CustomizableButton: UIButton {
         }
     }
     
-    public func applyCornerRadius(_ radius: CGFloat) {
-        self.cornerRadius = radius
-        self.layer.cornerRadius = radius
-        self.layer.masksToBounds = true
+    public func applyCornerRadius() {
+        if let radius = self.cornerRadius {
+            self.layer.cornerRadius = radius
+            self.layer.masksToBounds = true
+        }
     }
 
     /*
