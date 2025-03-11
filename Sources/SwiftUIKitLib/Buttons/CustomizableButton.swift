@@ -51,8 +51,11 @@ public class CustomizableButton: UIButton {
         applyBorder()
         applyCornerRadius()
     }
+}
+
+// MARK: Extension - Customization Methods
+extension CustomizableButton {
     
-    // MARK: - Customization Methods
     public func setupWith(title: String, font: UIFont, textColor: UIColor) {
         setTitle(title, for: .normal)
         titleLabel?.font = font
@@ -71,7 +74,10 @@ public class CustomizableButton: UIButton {
     public func setCornerRadius(_ radius: CGFloat) {
         self.cornerRadius = radius
     }
-    
+}
+
+// MARK: Extension - Apply background
+extension CustomizableButton {
     func applyBackground(_ background: ButtonBackgroundType) {
         switch background {
             case .color(let color):
@@ -91,7 +97,10 @@ public class CustomizableButton: UIButton {
             applyGradient(colors: colors)
         }
     }
-    
+}
+
+// MARK: Extension - Apply gradient
+extension CustomizableButton {
     func applyGradient(colors: [UIColor]) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = colors.map { $0.cgColor }
@@ -111,7 +120,10 @@ public class CustomizableButton: UIButton {
         
         layer.insertSublayer(gradientLayer, at: 0)
     }
-    
+}
+
+// MARK: Extension - Apply border
+extension CustomizableButton {
     func applyBorder() {
         if let width = self.borderWidth, let color = self.borderColor {
             layer.borderWidth = width
@@ -119,20 +131,14 @@ public class CustomizableButton: UIButton {
             layer.masksToBounds = true
         }
     }
-    
+}
+
+// MARK: Extension - Apply corner radius
+extension CustomizableButton {
     func applyCornerRadius() {
         if let radius = self.cornerRadius {
             self.layer.cornerRadius = radius
             self.layer.masksToBounds = true
         }
     }
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
