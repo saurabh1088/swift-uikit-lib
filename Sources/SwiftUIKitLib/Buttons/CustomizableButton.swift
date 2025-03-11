@@ -72,7 +72,7 @@ public class CustomizableButton: UIButton {
         self.cornerRadius = radius
     }
     
-    public func applyBackground(_ background: ButtonBackgroundType) {
+    func applyBackground(_ background: ButtonBackgroundType) {
         switch background {
             case .color(let color):
             backgroundColor = color
@@ -92,7 +92,7 @@ public class CustomizableButton: UIButton {
         }
     }
     
-    public func applyGradient(colors: [UIColor]) {
+    func applyGradient(colors: [UIColor]) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = colors.map { $0.cgColor }
         gradientLayer.frame = bounds
@@ -112,7 +112,7 @@ public class CustomizableButton: UIButton {
         layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    public func applyBorder() {
+    func applyBorder() {
         if let width = self.borderWidth, let color = self.borderColor {
             layer.borderWidth = width
             layer.borderColor = color.cgColor
@@ -120,7 +120,7 @@ public class CustomizableButton: UIButton {
         }
     }
     
-    public func applyCornerRadius() {
+    func applyCornerRadius() {
         if let radius = self.cornerRadius {
             self.layer.cornerRadius = radius
             self.layer.masksToBounds = true
