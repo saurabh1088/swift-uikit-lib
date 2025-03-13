@@ -18,7 +18,98 @@ public enum ButtonBackgroundType {
 }
 
 /**
- A highly customizable button built on top of UIButton, supporting various styles, states, and interactions.
+ # CustomizableButton
+
+ ## Overview
+ `CustomizableButton` is a subclass of `UIButton` designed to be highly customizable. It supports different background styles, borders, and corner radius, making it easy to adjust the appearance of buttons in an iOS application.
+
+ ## Features
+ - Supports different background types: solid color, image, or gradient.
+ - Allows setting custom borders with configurable width and color.
+ - Provides a configurable corner radius.
+ - Supports dynamic updates via the `layoutSubviews()` method.
+
+ ## Enum: ButtonBackgroundType
+ Defines the type of background that can be applied to a button.
+
+ ### Cases:
+ - `color(UIColor)`: Sets a solid background color.
+ - `image(UIImage)`: Applies a background image.
+ - `gradient([UIColor])`: Creates a gradient background with an array of colors.
+
+ ## Class: CustomizableButton
+ A customizable `UIButton` with added functionalities.
+
+ ### Properties:
+ - `backgroundType: ButtonBackgroundType?`: Stores the selected background type.
+ - `borderWidth: CGFloat?`: Defines the width of the button's border (default: 0).
+ - `borderColor: UIColor?`: Sets the border color (default: clear).
+ - `cornerRadius: CGFloat?`: Defines the button's corner radius (default: 0).
+
+ ### Initialization:
+ - `init(frame: CGRect)`: Standard initializer.
+ - `required init?(coder: NSCoder)`: Required initializer for storyboard support.
+ - `convenience init(frame: CGRect, title: String, font: UIFont, textColor: UIColor)`: Initializes the button with a title, font, and text color.
+
+ ### Lifecycle Method:
+ - `layoutSubviews()`: Called to update the button’s appearance. It ensures the background, border, and corner radius are applied dynamically.
+
+ ## Customization Methods
+
+ ### `setupWith(title: String, font: UIFont, textColor: UIColor)`
+ Configures the button with a title, font, and text color.
+
+ ### `setBackground(to type: ButtonBackgroundType)`
+ Sets the background type of the button.
+
+ ### `setBorder(with width: CGFloat, color: UIColor)`
+ Sets the border width and color.
+
+ ### `setCornerRadius(_ radius: CGFloat)`
+ Applies a corner radius to the button.
+
+ ## Background Application Methods
+
+ ### `applyBackground(_ background: ButtonBackgroundType)`
+ Applies the specified background type.
+
+ #### Behavior:
+ - For `.color`: Sets the background color.
+ - For `.image`: Uses `setBackgroundImage()` for older iOS versions and `UIButton.Configuration` for iOS 15+.
+ - For `.gradient`: Calls `applyGradient(colors:)`.
+
+ ### `applyGradient(colors: [UIColor])`
+ Applies a gradient background with the given colors.
+
+ #### Behavior:
+ - Creates a `CAGradientLayer`.
+ - Sets `startPoint` and `endPoint` to achieve a diagonal gradient.
+ - Ensures the background color and image are cleared for visibility.
+ - Inserts the gradient layer at index `0` to position it behind other elements.
+
+ ## Border & Corner Radius Application Methods
+
+ ### `applyBorder()`
+ Applies the border settings if `borderWidth` and `borderColor` are defined.
+
+ ### `applyCornerRadius()`
+ Sets the corner radius and enables `masksToBounds` to clip content within the button.
+
+ ## Notes
+ - The button supports iOS 15+ configurations but falls back to older methods when necessary.
+ - The `TODO` comments in the implementation suggest trials to ensure gradients render properly.
+ - Customization is separated into extensions for better code organization.
+
+ ## Usage Example
+ ```swift
+ let button = CustomizableButton(frame: CGRect(x: 50, y: 100, width: 200, height: 50),
+                                 title: "Click Me",
+                                 font: .systemFont(ofSize: 18),
+                                 textColor: .white)
+ button.setBackground(to: .gradient([.blue, .purple]))
+ button.setBorder(with: 2, color: .white)
+ button.setCornerRadius(10)
+ ```
  */
 public class CustomizableButton: UIButton {
     
