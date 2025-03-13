@@ -253,6 +253,8 @@ extension CustomizableButton {
         layer.shadowRadius = shadowRadius
         layer.shadowOpacity = shadowOpacity
         layer.shadowColor = shadowColor.cgColor
+        // Ensure the shadow is visible outside the button’s bounds.
+        // If `masksToBounds` is true, the shadow will be clipped and not visible.
         layer.masksToBounds = false
     }
 }
