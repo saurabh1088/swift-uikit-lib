@@ -118,6 +118,10 @@ public class CustomizableButton: UIButton {
     private var borderWidth: CGFloat? = 0
     private var borderColor: UIColor? = .clear
     private var cornerRadius: CGFloat? = 0
+    private var shadowOffset: CGSize = .zero
+    private var shadowRadius: CGFloat = 0
+    private var shadowOpacity: Float = 0
+    private var shadowColor: UIColor = .black
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -141,6 +145,7 @@ public class CustomizableButton: UIButton {
         }
         applyBorder()
         applyCornerRadius()
+        applyShadow()
     }
 }
 
@@ -164,6 +169,13 @@ extension CustomizableButton {
     
     public func setCornerRadius(_ radius: CGFloat) {
         self.cornerRadius = radius
+    }
+    
+    public func setShadow(offset: CGSize, radius: CGFloat, opacity: Float, color: UIColor) {
+        self.shadowOffset = offset
+        self.shadowRadius = radius
+        self.shadowOpacity = opacity
+        self.shadowColor = color
     }
 }
 
@@ -231,5 +243,16 @@ extension CustomizableButton {
             self.layer.cornerRadius = radius
             self.layer.masksToBounds = true
         }
+    }
+}
+
+// MARK: Extension - Apply shadow
+extension CustomizableButton {
+    func applyShadow() {
+        layer.shadowOffset = shadowOffset
+        layer.shadowRadius = shadowRadius
+        layer.shadowOpacity = shadowOpacity
+        layer.shadowColor = shadowColor.cgColor
+        layer.masksToBounds = false
     }
 }
