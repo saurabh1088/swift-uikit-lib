@@ -28,6 +28,7 @@ public enum ButtonBackgroundType {
  - Allows setting custom borders with configurable width and color.
  - Provides a configurable corner radius.
  - Supports dynamic updates via the `layoutSubviews()` method.
+ - Supports applying shadow with configurable properties.
 
  ## Enum: ButtonBackgroundType
  Defines the type of background that can be applied to a button.
@@ -45,6 +46,10 @@ public enum ButtonBackgroundType {
  - `borderWidth: CGFloat?`: Defines the width of the button's border (default: 0).
  - `borderColor: UIColor?`: Sets the border color (default: clear).
  - `cornerRadius: CGFloat?`: Defines the button's corner radius (default: 0).
+ - `shadowOffset: CGSize`: Defines the shadow offset.
+ - `shadowRadius: CGFloat`: Defines the shadow radius.
+ - `shadowOpacity: Float`: Defines the shadow opacity.
+ - `shadowColor: UIColor`: Defines the shadow color.
 
  ### Initialization:
  - `init(frame: CGRect)`: Standard initializer.
@@ -52,7 +57,7 @@ public enum ButtonBackgroundType {
  - `convenience init(frame: CGRect, title: String, font: UIFont, textColor: UIColor)`: Initializes the button with a title, font, and text color.
 
  ### Lifecycle Method:
- - `layoutSubviews()`: Called to update the button’s appearance. It ensures the background, border, and corner radius are applied dynamically.
+ - `layoutSubviews()`: Called to update the button’s appearance. It ensures the background, border, corner radius, and shadow are applied dynamically.
 
  ## Customization Methods
 
@@ -67,6 +72,9 @@ public enum ButtonBackgroundType {
 
  ### `setCornerRadius(_ radius: CGFloat)`
  Applies a corner radius to the button.
+
+ ### `setShadow(offset: CGSize, radius: CGFloat, opacity: Float, color: UIColor)`
+ Configures and applies a shadow to the button.
 
  ## Background Application Methods
 
@@ -95,9 +103,17 @@ public enum ButtonBackgroundType {
  ### `applyCornerRadius()`
  Sets the corner radius and enables `masksToBounds` to clip content within the button.
 
+ ## Shadow Application Method
+
+ ### `applyShadow()`
+ Applies the shadow settings if configured.
+
+ #### Behavior:
+ - Sets `shadowOffset`, `shadowRadius`, `shadowOpacity`, and `shadowColor`.
+ - Ensures `masksToBounds` is `false` to allow shadow visibility.
+
  ## Notes
  - The button supports iOS 15+ configurations but falls back to older methods when necessary.
- - The `TODO` comments in the implementation suggest trials to ensure gradients render properly.
  - Customization is separated into extensions for better code organization.
 
  ## Usage Example
@@ -109,6 +125,7 @@ public enum ButtonBackgroundType {
  button.setBackground(to: .gradient([.blue, .purple]))
  button.setBorder(with: 2, color: .white)
  button.setCornerRadius(10)
+ button.setShadow(offset: CGSize(width: 2, height: 2), radius: 4, opacity: 0.5, color: .black)
  ```
  */
 public class CustomizableButton: UIButton {
