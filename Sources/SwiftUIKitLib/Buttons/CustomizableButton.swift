@@ -93,6 +93,7 @@ public class CustomizableButton: UIButton {
     private var shadowOpacity: Float = 0
     private var shadowColor: UIColor = .black
     private var tapAction: (() -> Void)?
+    private var activityIndicator: UIActivityIndicatorView?
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -238,5 +239,36 @@ extension CustomizableButton {
 extension CustomizableButton {
     @objc private func buttonTapped() {
         tapAction?()
+    }
+}
+
+// MARK: - Activity Indicator Methods
+extension CustomizableButton {
+    public func showLoadingIndicator() {
+        if activityIndicator == nil {
+            if #available(iOS 13.0, *) {
+                activityIndicator = UIActivityIndicatorView(style: .medium)
+            } else {
+                // Fallback on earlier versions
+            }
+            activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(activityIndicator!)
+            
+            NSLayoutConstraint.activate([
+                activityIndicator!.centerXAnchor.constraint(equalTo: centerXAnchor),
+                activityIndicator!.centerYAnchor.constraint(equalTo: centerYAnchor)
+            ])
+        }
+        setTitle(nil, for: .normal)
+        isEnabled = false
+        activityIndicator?.startAnimating()
+    }
+    
+    public func hideLoadingIndicator(with title: String) {
+        activityIndicator?.stopAnimating()
+        activityIndicator?.removeFromSuperview()
+        activityIndicator = nil
+        setTitle(title, for: .normal)
+        isEnabled = true
     }
 }
