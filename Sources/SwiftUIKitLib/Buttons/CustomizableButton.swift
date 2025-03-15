@@ -250,6 +250,7 @@ extension CustomizableButton {
                 activityIndicator = UIActivityIndicatorView(style: .medium)
             } else {
                 // Fallback on earlier versions
+                activityIndicator = UIActivityIndicatorView(style: .gray)
             }
             activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
             addSubview(activityIndicator!)
