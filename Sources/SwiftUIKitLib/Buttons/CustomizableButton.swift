@@ -139,6 +139,7 @@ public class CustomizableButton: UIButton {
     private var shadowRadius: CGFloat = 0
     private var shadowOpacity: Float = 0
     private var shadowColor: UIColor = .black
+    private var tapAction: (() -> Void)?
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -193,6 +194,11 @@ extension CustomizableButton {
         self.shadowRadius = radius
         self.shadowOpacity = opacity
         self.shadowColor = color
+    }
+    
+    public func setTapAction(_ action: @escaping () -> Void) {
+        self.tapAction = action
+        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
 }
 
@@ -273,5 +279,11 @@ extension CustomizableButton {
         // Ensure the shadow is visible outside the button’s bounds.
         // If `masksToBounds` is true, the shadow will be clipped and not visible.
         layer.masksToBounds = false
+    }
+}
+
+extension CustomizableButton {
+    @objc private func buttonTapped() {
+        tapAction?()
     }
 }
