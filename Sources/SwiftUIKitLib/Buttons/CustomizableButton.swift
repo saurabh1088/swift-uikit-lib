@@ -29,6 +29,7 @@ public enum ButtonBackgroundType {
  - Provides a configurable corner radius.
  - Supports dynamic updates via the `layoutSubviews()` method.
  - Supports applying shadow with configurable properties.
+ - Supports tap actions with a closure-based API.
 
  ## Enum: ButtonBackgroundType
  Defines the type of background that can be applied to a button.
@@ -50,71 +51,20 @@ public enum ButtonBackgroundType {
  - `shadowRadius: CGFloat`: Defines the shadow radius.
  - `shadowOpacity: Float`: Defines the shadow opacity.
  - `shadowColor: UIColor`: Defines the shadow color.
+ - `tapAction: (() -> Void)?`: Closure executed when the button is tapped.
 
  ### Initialization:
  - `init(frame: CGRect)`: Standard initializer.
  - `required init?(coder: NSCoder)`: Required initializer for storyboard support.
  - `convenience init(frame: CGRect, title: String, font: UIFont, textColor: UIColor)`: Initializes the button with a title, font, and text color.
 
- ### Lifecycle Method:
- - `layoutSubviews()`: Called to update the button’s appearance. It ensures the background, border, corner radius, and shadow are applied dynamically.
-
- ## Customization Methods
-
- ### `setupWith(title: String, font: UIFont, textColor: UIColor)`
- Configures the button with a title, font, and text color.
-
- ### `setBackground(to type: ButtonBackgroundType)`
- Sets the background type of the button.
-
- ### `setBorder(with width: CGFloat, color: UIColor)`
- Sets the border width and color.
-
- ### `setCornerRadius(_ radius: CGFloat)`
- Applies a corner radius to the button.
-
- ### `setShadow(offset: CGSize, radius: CGFloat, opacity: Float, color: UIColor)`
- Configures and applies a shadow to the button.
-
- ## Background Application Methods
-
- ### `applyBackground(_ background: ButtonBackgroundType)`
- Applies the specified background type.
-
- #### Behavior:
- - For `.color`: Sets the background color.
- - For `.image`: Uses `setBackgroundImage()` for older iOS versions and `UIButton.Configuration` for iOS 15+.
- - For `.gradient`: Calls `applyGradient(colors:)`.
-
- ### `applyGradient(colors: [UIColor])`
- Applies a gradient background with the given colors.
-
- #### Behavior:
- - Creates a `CAGradientLayer`.
- - Sets `startPoint` and `endPoint` to achieve a diagonal gradient.
- - Ensures the background color and image are cleared for visibility.
- - Inserts the gradient layer at index `0` to position it behind other elements.
-
- ## Border & Corner Radius Application Methods
-
- ### `applyBorder()`
- Applies the border settings if `borderWidth` and `borderColor` are defined.
-
- ### `applyCornerRadius()`
- Sets the corner radius and enables `masksToBounds` to clip content within the button.
-
- ## Shadow Application Method
-
- ### `applyShadow()`
- Applies the shadow settings if configured.
-
- #### Behavior:
- - Sets `shadowOffset`, `shadowRadius`, `shadowOpacity`, and `shadowColor`.
- - Ensures `masksToBounds` is `false` to allow shadow visibility.
-
- ## Notes
- - The button supports iOS 15+ configurations but falls back to older methods when necessary.
- - Customization is separated into extensions for better code organization.
+ ### Customization Methods
+ - `setupWith(title: String, font: UIFont, textColor: UIColor)`: Configures the button with a title, font, and text color.
+ - `setBackground(to type: ButtonBackgroundType)`: Sets the background type of the button.
+ - `setBorder(with width: CGFloat, color: UIColor)`: Sets the border width and color.
+ - `setCornerRadius(_ radius: CGFloat)`: Applies a corner radius to the button.
+ - `setShadow(offset: CGSize, radius: CGFloat, opacity: Float, color: UIColor)`: Configures and applies a shadow to the button.
+ - `setTapAction(_ action: @escaping () -> Void)`: Sets the tap action closure.
 
  ## Usage Example
  ```swift
@@ -126,6 +76,9 @@ public enum ButtonBackgroundType {
  button.setBorder(with: 2, color: .white)
  button.setCornerRadius(10)
  button.setShadow(offset: CGSize(width: 2, height: 2), radius: 4, opacity: 0.5, color: .black)
+ button.setTapAction {
+     print("Button tapped!")
+ }
  ```
  */
 public class CustomizableButton: UIButton {
@@ -139,6 +92,7 @@ public class CustomizableButton: UIButton {
     private var shadowRadius: CGFloat = 0
     private var shadowOpacity: Float = 0
     private var shadowColor: UIColor = .black
+    private var tapAction: (() -> Void)?
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -193,6 +147,11 @@ extension CustomizableButton {
         self.shadowRadius = radius
         self.shadowOpacity = opacity
         self.shadowColor = color
+    }
+    
+    public func setTapAction(_ action: @escaping () -> Void) {
+        self.tapAction = action
+        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
 }
 
@@ -273,5 +232,11 @@ extension CustomizableButton {
         // Ensure the shadow is visible outside the button’s bounds.
         // If `masksToBounds` is true, the shadow will be clipped and not visible.
         layer.masksToBounds = false
+    }
+}
+
+extension CustomizableButton {
+    @objc private func buttonTapped() {
+        tapAction?()
     }
 }
