@@ -35,18 +35,8 @@ public class CustomizableActivityButton: CustomizableButton {
         stackView.spacing = 8
         stackView.isUserInteractionEnabled = false
         
-        if #available(iOS 13.0, *) {
-            activityIndicator = UIActivityIndicatorView(style: .medium)
-        } else {
-            // Fallback on earlier versions
-            activityIndicator = UIActivityIndicatorView(style: .gray)
-        }
-        
         titleLabelContainer.textAlignment = .left
-        activityIndicator?.hidesWhenStopped = true
-        
         stackView.addArrangedSubview(titleLabelContainer)
-        stackView.addArrangedSubview(activityIndicator ?? UIActivityIndicatorView(style: .gray))
         
         activityIndicatorType = .withLabel
         
@@ -57,5 +47,47 @@ public class CustomizableActivityButton: CustomizableButton {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+}
+
+extension CustomizableActivityButton {
+    public override func showLoadingIndicator() {
+        if activityIndicator == nil {
+            if #available(iOS 13.0, *) {
+                activityIndicator = UIActivityIndicatorView(style: .medium)
+            } else {
+                // Fallback on earlier versions
+                activityIndicator = UIActivityIndicatorView(style: .gray)
+            }
+            
+            // Expand the button width if needed
+            let newWidth = frame.width + 30
+            let newFrame = CGRect(x: frame.origin.x - 15, y: frame.origin.y, width: newWidth, height: frame.height)
+
+            UIView.animate(withDuration: 0.3, animations: {
+                self.frame = newFrame
+                self.titleLabelContainer.textAlignment = .left
+                // TODO: Manage activityIndicator better than providing default if nil
+                self.stackView.addArrangedSubview(self.activityIndicator ?? UIActivityIndicatorView(style: .gray))
+                self.activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
+                self.activityIndicator?.startAnimating()
+            })
+            
+            
+            NSLayoutConstraint.activate([
+                activityIndicator!.centerXAnchor.constraint(equalTo: centerXAnchor),
+                activityIndicator!.centerYAnchor.constraint(equalTo: centerYAnchor)
+            ])
+        }
+        isEnabled = false
+    }
+    
+    public override func hideLoadingIndicator(with title: String) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.titleLabelContainer.textAlignment = .center
+            self.activityIndicator?.stopAnimating()
+            self.stackView.removeArrangedSubview(self.activityIndicator ?? UIActivityIndicatorView(style: .gray))
+            self.activityIndicator?.removeFromSuperview()
+        })
     }
 }
