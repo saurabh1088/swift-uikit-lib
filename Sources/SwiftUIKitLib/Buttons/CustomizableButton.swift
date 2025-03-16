@@ -299,6 +299,7 @@ public class CustomizableActivityButton: CustomizableButton {
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.spacing = 8
+        stackView.isUserInteractionEnabled = false
         
         titleLabelContainer.textAlignment = .left
         activityIndicator?.hidesWhenStopped = true
