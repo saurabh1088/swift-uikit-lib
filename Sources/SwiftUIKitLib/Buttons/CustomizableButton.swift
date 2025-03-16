@@ -17,6 +17,11 @@ public enum ButtonBackgroundType {
     case gradient([UIColor])
 }
 
+public enum ActivityIndicatorType {
+    case withLabel
+    case withoutLabel
+}
+
 /**
  # CustomizableButton
 
@@ -94,6 +99,7 @@ public class CustomizableButton: UIButton {
     private var shadowColor: UIColor = .black
     private var tapAction: (() -> Void)?
     var activityIndicator: UIActivityIndicatorView?
+    var activityIndicatorType: ActivityIndicatorType = .withoutLabel
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -245,32 +251,41 @@ extension CustomizableButton {
 // MARK: - Activity Indicator Methods
 extension CustomizableButton {
     public func showLoadingIndicator() {
-        if activityIndicator == nil {
-            if #available(iOS 13.0, *) {
-                activityIndicator = UIActivityIndicatorView(style: .medium)
-            } else {
-                // Fallback on earlier versions
-                activityIndicator = UIActivityIndicatorView(style: .gray)
+        switch activityIndicatorType {
+        case .withLabel:
+            activityIndicator?.startAnimating()
+        case .withoutLabel:
+            if activityIndicator == nil {
+                if #available(iOS 13.0, *) {
+                    activityIndicator = UIActivityIndicatorView(style: .medium)
+                } else {
+                    // Fallback on earlier versions
+                    activityIndicator = UIActivityIndicatorView(style: .gray)
+                }
+                activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
+                addSubview(activityIndicator!)
+                
+                NSLayoutConstraint.activate([
+                    activityIndicator!.centerXAnchor.constraint(equalTo: centerXAnchor),
+                    activityIndicator!.centerYAnchor.constraint(equalTo: centerYAnchor)
+                ])
             }
-            activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(activityIndicator!)
-            
-            NSLayoutConstraint.activate([
-                activityIndicator!.centerXAnchor.constraint(equalTo: centerXAnchor),
-                activityIndicator!.centerYAnchor.constraint(equalTo: centerYAnchor)
-            ])
+            setTitle(nil, for: .normal)
+            isEnabled = false
+            activityIndicator?.startAnimating()
         }
-        setTitle(nil, for: .normal)
-        isEnabled = false
-        activityIndicator?.startAnimating()
     }
     
     public func hideLoadingIndicator(with title: String) {
-        activityIndicator?.stopAnimating()
-        activityIndicator?.removeFromSuperview()
-        activityIndicator = nil
-        setTitle(title, for: .normal)
-        isEnabled = true
+        switch activityIndicatorType {
+        case .withLabel:
+            activityIndicator?.stopAnimating()
+        case .withoutLabel:
+            activityIndicator?.removeFromSuperview()
+            activityIndicator = nil
+            setTitle(title, for: .normal)
+            isEnabled = true
+        }
     }
 }
 
@@ -306,6 +321,8 @@ public class CustomizableActivityButton: CustomizableButton {
         
         stackView.addArrangedSubview(titleLabelContainer)
         stackView.addArrangedSubview(activityIndicator ?? UIActivityIndicatorView(style: .gray))
+        
+        activityIndicatorType = .withLabel
         
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
