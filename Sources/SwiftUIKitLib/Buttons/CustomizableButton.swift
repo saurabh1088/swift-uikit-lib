@@ -328,7 +328,7 @@ public class CustomizableActivityButton: CustomizableButton {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 8),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
