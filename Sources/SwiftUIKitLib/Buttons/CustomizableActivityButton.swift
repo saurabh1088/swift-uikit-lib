@@ -73,11 +73,11 @@ extension CustomizableActivityButton {
                 self.activityIndicator?.startAnimating()
             })
             
-            
-            NSLayoutConstraint.activate([
-                activityIndicator!.centerXAnchor.constraint(equalTo: centerXAnchor),
-                activityIndicator!.centerYAnchor.constraint(equalTo: centerYAnchor)
-            ])
+            // TODO: Commented out for testing
+//            NSLayoutConstraint.activate([
+//                activityIndicator!.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                activityIndicator!.centerYAnchor.constraint(equalTo: centerYAnchor)
+//            ])
         }
         isEnabled = false
     }
