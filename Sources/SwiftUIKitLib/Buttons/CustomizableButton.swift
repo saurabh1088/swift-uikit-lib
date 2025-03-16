@@ -316,6 +316,13 @@ public class CustomizableActivityButton: CustomizableButton {
         stackView.spacing = 8
         stackView.isUserInteractionEnabled = false
         
+        if #available(iOS 13.0, *) {
+            activityIndicator = UIActivityIndicatorView(style: .medium)
+        } else {
+            // Fallback on earlier versions
+            activityIndicator = UIActivityIndicatorView(style: .gray)
+        }
+        
         titleLabelContainer.textAlignment = .left
         activityIndicator?.hidesWhenStopped = true
         
