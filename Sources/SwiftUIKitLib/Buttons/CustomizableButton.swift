@@ -93,7 +93,7 @@ public class CustomizableButton: UIButton {
     private var shadowOpacity: Float = 0
     private var shadowColor: UIColor = .black
     private var tapAction: (() -> Void)?
-    private var activityIndicator: UIActivityIndicatorView?
+    var activityIndicator: UIActivityIndicatorView?
     
     // MARK: - Initialization
     public override init(frame: CGRect) {
@@ -124,7 +124,7 @@ public class CustomizableButton: UIButton {
 // MARK: Extension - Customization Methods
 extension CustomizableButton {
     
-    public func setupWith(title: String, font: UIFont, textColor: UIColor) {
+    @objc public func setupWith(title: String, font: UIFont, textColor: UIColor) {
         setTitle(title, for: .normal)
         titleLabel?.font = font
         setTitleColor(textColor, for: .normal)
@@ -271,5 +271,47 @@ extension CustomizableButton {
         activityIndicator = nil
         setTitle(title, for: .normal)
         isEnabled = true
+    }
+}
+
+public class CustomizableActivityButton: CustomizableButton {
+    private let stackView = UIStackView()
+    private let titleLabelContainer = UILabel()
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupStackView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupStackView()
+    }
+    
+    public override func setupWith(title: String, font: UIFont, textColor: UIColor) {
+        titleLabelContainer.text = title
+        titleLabelContainer.font = font
+        titleLabelContainer.textColor = textColor
+    }
+    
+    private func setupStackView() {
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        
+        titleLabelContainer.textAlignment = .left
+        activityIndicator?.hidesWhenStopped = true
+        
+        stackView.addArrangedSubview(titleLabelContainer)
+        stackView.addArrangedSubview(activityIndicator ?? UIActivityIndicatorView(style: .gray))
+        
+        addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
     }
 }
