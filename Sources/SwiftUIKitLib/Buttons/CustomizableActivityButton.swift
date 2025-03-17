@@ -72,14 +72,7 @@ extension CustomizableActivityButton {
                 self.activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
                 self.activityIndicator?.startAnimating()
             })
-            
-            // TODO: Commented out for testing
-//            NSLayoutConstraint.activate([
-//                activityIndicator!.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                activityIndicator!.centerYAnchor.constraint(equalTo: centerYAnchor)
-//            ])
         }
-        isEnabled = false
     }
     
     public override func hideLoadingIndicator(with title: String) {
