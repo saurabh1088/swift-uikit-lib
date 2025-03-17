@@ -250,7 +250,7 @@ extension CustomizableButton {
 
 // MARK: - Activity Indicator Methods
 extension CustomizableButton {
-    public func showLoadingIndicator() {
+    @objc public func showLoadingIndicator() {
         switch activityIndicatorType {
         case .withLabel:
             activityIndicator?.startAnimating()
@@ -276,7 +276,7 @@ extension CustomizableButton {
         }
     }
     
-    public func hideLoadingIndicator(with title: String) {
+    @objc public func hideLoadingIndicator(with title: String) {
         switch activityIndicatorType {
         case .withLabel:
             activityIndicator?.stopAnimating()
