@@ -35,7 +35,7 @@ public class CustomizableActivityButton: CustomizableButton {
         stackView.spacing = 8
         stackView.isUserInteractionEnabled = false
         
-        titleLabelContainer.textAlignment = .left
+        titleLabelContainer.textAlignment = .center
         stackView.addArrangedSubview(titleLabelContainer)
         
         activityIndicatorType = .withLabel
