@@ -64,7 +64,7 @@ extension CustomizableActivityButton {
             let newWidth = frame.width + 30
             let newFrame = CGRect(x: frame.origin.x - 15, y: frame.origin.y, width: newWidth, height: frame.height)
 
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.frame = newFrame
                 self.titleLabelContainer.textAlignment = .left
                 // TODO: Manage activityIndicator better than providing default if nil
@@ -76,7 +76,7 @@ extension CustomizableActivityButton {
     }
     
     public override func hideLoadingIndicator(with title: String) {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.titleLabelContainer.textAlignment = .center
             self.activityIndicator?.stopAnimating()
             self.stackView.removeArrangedSubview(self.activityIndicator ?? UIActivityIndicatorView(style: .gray))
